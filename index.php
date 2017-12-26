@@ -1,16 +1,6 @@
 <?php
 //////////////////CONEXION A LA BASE DE DATOS ///////////////
-
-$host="localhost";
-$usuario="root";
-$contraseña="";
-$base="graficasdinamicas";
-
-$conexion=new mysqli($host,$usuario,$contraseña,$base);
-if($conexion->connect_errno)
-{
-	die("Fallo la conexion:(".$conexion->mysqli_connect_errno().")".$conexion->mysqli_connect_error());
-}
+require 'conexion.php';
 
 
 ///////////////CONSULTAS DE LA BD //////////////////////
@@ -81,10 +71,15 @@ while($res=mysqli_fetch_array($resC3)){
 	
 	<!--Se importan las librerias necesarias-->
 	<script src="Highcharts-6.0.4/code/highcharts.js"></script>
-	<script src="Highcharts-6.0.4/modules/exporting.js"></script>		
+	<script src="Highcharts-6.0.4/code/modules/exporting.js"></script>		
 
 	<!--Se carga la grafica (debe de estar antes de la ESTRUCTURA de la GRAFICA-->
 	<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+    <!--Boton que redirecciona a otras graficas-->
+    <div class="container">
+        <a class="btn btn-info" href="secciones/barras.php">Ver grafica de barras</a>   
+    </div>
 	
 	<!--Script de graficas ESTRUCTURA dinamicas-->
 
@@ -100,6 +95,9 @@ while($res=mysqli_fetch_array($resC3)){
     },
     title: {
         text: 'Registros extraidos de SQL'
+    },
+     subtitle: {
+        text: 'Source: <a href="https://github.com/Simon1207">Github: Simon1207</a>'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -152,7 +150,7 @@ while($res=mysqli_fetch_array($resC3)){
  		
 		</script>
 
-	
+
 </body>
 
 
